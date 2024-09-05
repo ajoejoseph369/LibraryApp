@@ -1,4 +1,4 @@
-package com.p10.Library_Management;
+package com.p10.Library_Management.service;
 
 import com.p10.Library_Management.entity.Book;
 import com.p10.Library_Management.repository.BookRepository;
@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.LoggingMXBean;
 
 @Service
 public class BookService {

@@ -3,7 +3,7 @@ package com.p10.Library_Management.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Books")
+@Table(name = "books")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
