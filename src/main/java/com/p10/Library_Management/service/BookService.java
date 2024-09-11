@@ -1,5 +1,6 @@
 package com.p10.Library_Management.service;
 
+import com.p10.Library_Management.dao.BookDAO;
 import com.p10.Library_Management.entity.Book;
 import com.p10.Library_Management.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,30 +13,33 @@ import java.util.Optional;
 public class BookService {
 
     @Autowired
+    private BookDAO bookDAO;
+
+    @Autowired
     private BookRepository bookRepository;
 
     public Book addBook(Book book) {
-        return bookRepository.save(book);
+        return bookDAO.save(book);
     }
 
     public List<Book> listBooks() {
-        return bookRepository.findAll();
+        return bookDAO.findAll();
     }
 
-    public Optional<Book> getBookQuantity(Long BookId) {
-        return bookRepository.findById(BookId);
+    public Optional<Integer> getBookQuantity(Long BookId) {
+        return bookRepository.getBookQuantity(BookId);
     }
 
     public Book updateQuantity(Long BookId, int quantity) {
-        Optional<Book> book = bookRepository.findById(BookId);
+        Optional<Book> book = bookDAO.findById(BookId);
         if (book.isPresent()) {
             book.get().setQuantity(quantity);
-            return bookRepository.save(book.get());
+            return bookDAO.save(book.get());
         }
         return null;
     }
 
     public void deleteBook(Long BookId) {
-        bookRepository.deleteById(BookId);
+        bookDAO.deleteById(BookId);
     }
 }

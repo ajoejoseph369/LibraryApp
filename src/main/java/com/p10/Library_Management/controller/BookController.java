@@ -26,7 +26,7 @@ public class BookController {
     }
 
     @GetMapping("getQuantity/{bookID}")
-    public ResponseEntity<Book> getBookQuantity(@PathVariable Long bookID) {
+    public ResponseEntity<Integer> getBookQuantity(@PathVariable Long bookID) {
         return bookService.getBookQuantity(bookID)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
