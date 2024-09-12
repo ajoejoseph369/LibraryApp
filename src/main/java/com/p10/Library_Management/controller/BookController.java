@@ -1,5 +1,6 @@
 package com.p10.Library_Management.controller;
 
+import com.p10.Library_Management.dto.BookDTO;
 import com.p10.Library_Management.service.BookService;
 import com.p10.Library_Management.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ public class BookController {
     private BookService bookService;
 
     @PostMapping("/create")
-    public Book addBook(@RequestBody Book book) {
-        return bookService.addBook(book);
+    public BookDTO addBook(@RequestBody BookDTO bookDTO) {
+        return bookService.addBook(bookDTO);
     }
 
     @GetMapping("/findAll")

@@ -1,6 +1,7 @@
 package com.p10.Library_Management.service;
 
 import com.p10.Library_Management.dao.BookDAO;
+import com.p10.Library_Management.dto.BookDTO;
 import com.p10.Library_Management.entity.Book;
 import com.p10.Library_Management.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,10 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
-    public Book addBook(Book book) {
-        return bookDAO.save(book);
+    public BookDTO addBook(BookDTO bookDTO) {
+        Book book = mapToEntity(bookDTO); //convert dto to entity type
+        Book savedBook = bookDAO.save(book); //save entity to db
+        return mapToDTO(savedBook); //convert entity back to DTO
     }
 
     public List<Book> listBooks() {
@@ -41,5 +44,18 @@ public class BookService {
 
     public void deleteBook(Long BookId) {
         bookDAO.deleteById(BookId);
+    }
+
+    private BookDTO mapToDTO(Book book) {
+        return new BookDTO(book.getBookId(),book.getBookName(),book.getAuthor(),book.getQuantity());
+    }
+
+    private Book mapToEntity(BookDTO bookDTO) {
+        Book book = new Book();
+        book.setBookId(bookDTO.getId());
+        book.setBookName(bookDTO.getBookName());
+        book.setAuthor(bookDTO.getAuthor());
+        book.setQuantity(bookDTO.getQuantity());
+        return book;
     }
 }
